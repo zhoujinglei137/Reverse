@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 约束文件 -->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--配置  -->
+<configuration>
+    <!--加载外界文件的配置：数据库的配置信息  -->
+    <properties resource="dbconfig.properties"/>
+    <!--全局设置  -->
+    <settings>
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+    <!--别名，主要是为mapper文件中的参数的类型写上简称  -->
+    <typeAliases>
+        <!--为单个的类写别名  -->
+        <!-- <typeAlias alias="Student" type="org.qf.domain.Student"/> -->
+        <!--为整个包设置，这样的话mapper文件使用改包的类就可以直接使用无需包名  -->
+        <package name="com.qf.domain"/>
+    </typeAliases>
+    <!--数据库的环境设置
+     default使用哪个配置-->
+    <environments default="test">
+        <!--配置信息，id唯一标记  -->
+        <environment id="test">
+            <!--配置事物管理
+            type:类型
+            取值说明：
+            1、JDBC：直接使用JDBC的事物模块，设置connection开启事物，根据情况进行回滚或提交
+            2、MANAGED：这个值标记本身什么都不做，不会提交或回滚事物，但是可以使用容器来管理事物
+            默认会关闭连接，closeConnection设置为false  -->
+            <transactionManager type="MANAGED"></transactionManager>
+            <!--配置数据库的连接数据源
+            type:类型
+            取值说明：
+            1、UNPOOLED:不使用数据库连接池
+            2、POOLED:使用数据库连接池 -->
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="${driverclass}"/>
+                <property name="url" value="${dburl}"/>
+                <property name="username" value="${dbuser}"/>
+                <property name="password" value="${dbpass}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--映射文件，就是需要MyBatis管理的接口实现类对应的映射文件  -->
+    <!--<mappers>-->
+        <!--基于xml的实现  -->
+        <!--<mapper resource="org/qf/dao/StudentDaoMapper.xml"/>-->
+        <!-- 基于注解的实现 -->
+        <!--  <mapper class=""/> -->
+        <!--标记指定的包  -->
+        <!-- <package name="org.qf.dao"/> -->
+    <!--</mappers>-->
+</configuration>
