@@ -37,6 +37,6 @@ public class Mytest {
         MyBatisGenerator generator=new MyBatisGenerator(configuration, callback,list );
         //6、生成
         generator.generate(null);
-        System.out.println("11111");
+        System.out.println("111");
     }
 }
